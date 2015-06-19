@@ -1,0 +1,6 @@
+<h2>New Badge for <%= @project.name %></h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: project_badge_path(@conn, :create, @project) %>
+
+<%= link "Back", to: project_badge_path(@conn, :index, @project) %>

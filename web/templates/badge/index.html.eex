@@ -1,0 +1,28 @@
+<h2>Listing badges</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image Url</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for badge <- @badges do %>
+    <tr>
+      <td><%= badge.name %></td>
+      <td><%= badge.image_url %></td>
+
+      <td class="text-right">
+        <%= link "Update", to: project_badge_path(@conn, :edit, @project, badge), class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: project_badge_path(@conn, :delete, @project, badge), method: :delete, class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New badge", to: project_badge_path(@conn, :new, @project) %>
+<%= link "Project", to: project_path(@conn, :index) %>
