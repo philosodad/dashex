@@ -4,18 +4,15 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Homepage</th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for project <- @projects do %>
     <tr>
-      <td><%= project.name %></td>
-      <td><%= project.homepage %></td>
+      <td><a href="<%= project.homepage %>"><%= project.name %></a></td>
       <%= for badge <- project.badges do %>
-        <td><img src="<%= badge.image_url%>"/></td>
+        <td><a href="<%= badge.service_link %>"><img src="<%= badge.image_url%>"/></a></td>
       <% end %>
 
       <td class="text-right">

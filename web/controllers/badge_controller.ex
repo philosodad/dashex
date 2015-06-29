@@ -41,7 +41,17 @@ defmodule Dashex.BadgeController do
     render(conn, "edit.html", badge: badge, project: project, changeset: changeset)
   end
 
-  def update(conn, _, _, _) do
+  def update(conn, %{"id" => id, "badge" => badge_params}) do
+    badge = Repo.get(Badge, id)
+    changeset = Badge.changeset(badge, badge_params)
+
+    if changeset.valid? do
+      Repo.update(changeset)
+
+      conn
+      |> put_flash(:info, "Badge updated successfully.")
+      |> redirect(to: project_badge_path(conn, :index, conn.assigns.project))
+    end
   end
 
   def delete(conn, %{"id" => id}) do

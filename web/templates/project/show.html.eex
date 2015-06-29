@@ -21,6 +21,7 @@
     <tr>
       <th>Name</th>
       <th>Image Url</th>
+      <th>Service Url</th>
 
       <th></th>
     </tr>
@@ -29,8 +30,8 @@
 <%= for badge <- @badges do %>
     <tr>
       <td><%= badge.name %></td>
-      <td><a href=<%="#{badge.image_url}"%>><%=badge.image_url%></a></td>
-
+      <td><%= badge.image_url %></td>
+      <td><%= badge.service_link %></td>
     </tr>
 <% end %>
   </tbody>

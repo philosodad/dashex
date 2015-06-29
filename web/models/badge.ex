@@ -4,13 +4,14 @@ defmodule Dashex.Badge do
   schema "badges" do
     field :name, :string
     field :image_url, :string
+    field :service_link, :string
 
     belongs_to :project, Dashex.Project
     timestamps
   end
 
   @required_fields ~w(name image_url)
-  @optional_fields ~w()
+  @optional_fields ~w(service_link)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
