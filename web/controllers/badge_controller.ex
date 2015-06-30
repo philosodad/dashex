@@ -43,6 +43,7 @@ defmodule Dashex.BadgeController do
 
   def update(conn, %{"id" => id, "badge" => badge_params}) do
     badge = Repo.get(Badge, id)
+    IEx.pry
     changeset = Badge.changeset(badge, badge_params)
 
     if changeset.valid? do
