@@ -18,6 +18,16 @@ defmodule Dashex.ProjectController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def new_from_readme(conn, _params) do
+    changeset = Project.changeset(%Project{})
+    render(conn, "new_from_readme.html", changeset: changeset)
+  end
+
+
+  def create(conn, %{"project" => project_params}, :github) do
+    IEx.pry
+  end
+
   def create(conn, %{"project" => project_params}) do
     changeset = Project.changeset(%Project{}, project_params)
 

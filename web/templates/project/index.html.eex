@@ -26,3 +26,4 @@
 </table>
 
 <%= link "New project", to: project_path(@conn, :new) %>
+<%= link "New project from README", to: project_path(@conn, :new_from_readme) %>

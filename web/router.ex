@@ -20,6 +20,8 @@ defmodule Dashex.Router do
     resources "/projects", ProjectController do
       resources "/badges", BadgeController
     end
+
+    get "projects/new_from_readme", ProjectController, :new_from_readme
   end
 
   # Other scopes may use custom stacks.
