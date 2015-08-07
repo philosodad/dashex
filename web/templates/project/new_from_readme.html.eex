@@ -1,6 +1,5 @@
 <h2>New project</h2>
 
-<%= render "form_rdme.html", changeset: @changeset,
-                        action: project_path(@conn, :create) %>
+<%= render "form_rdme.html", conn: @conn %>
 
 <%= link "Back", to: project_path(@conn, :index) %>

@@ -18,7 +18,7 @@ defmodule Dashex.Mixfile do
   def application do
     [mod: {Dashex, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpotion]]
   end
 
   # Specifies which paths to compile per environment
@@ -35,6 +35,8 @@ defmodule Dashex.Mixfile do
      {:phoenix_html, "~> 1.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:exrm, "~> 0.15.3"},
+     {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
+     {:httpotion, "~> 2.1.0"},
      {:cowboy, "~> 1.0"}]
   end
 end

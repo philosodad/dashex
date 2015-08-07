@@ -16,12 +16,13 @@ defmodule Dashex.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/projects/new_from_readme", ProjectController, :new_from_readme
+    post "/projects/new_from_readme", ProjectController, :create_from_readme
 
     resources "/projects", ProjectController do
       resources "/badges", BadgeController
     end
 
-    get "projects/new_from_readme", ProjectController, :new_from_readme
   end
 
   # Other scopes may use custom stacks.

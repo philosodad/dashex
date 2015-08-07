@@ -1,5 +1,7 @@
 defmodule Dashex.Badge do
   use Dashex.Web, :model
+  require HTTPotion
+  require IEx
 
   schema "badges" do
     field :name, :string
@@ -23,4 +25,15 @@ defmodule Dashex.Badge do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def process_readme(uri) do
+    badgeline = ~r/\[\!\[.*\]\(https:\/\/.*\)\]\(https/
+    splitline = ~r/\[\!\[(?<name>[\w\s]+)\]\((?<image_url>.+)\)\]\((?<service_link>.+)\)/
+
+    badge_array = HTTPotion.get(uri).body |>
+      String.split("\n") |>
+      Enum.filter(fn(s) -> Regex.match?(badgeline, s) end ) |>
+      Enum.map(fn(s) -> Regex.named_captures(splitline, s) end )
+  end
+
 end

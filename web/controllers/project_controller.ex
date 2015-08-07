@@ -19,13 +19,24 @@ defmodule Dashex.ProjectController do
   end
 
   def new_from_readme(conn, _params) do
-    changeset = Project.changeset(%Project{})
-    render(conn, "new_from_readme.html", changeset: changeset)
+    render(conn, "new_from_readme.html")
   end
 
 
-  def create(conn, %{"project" => project_params}, :github) do
-    IEx.pry
+  def create_from_readme(conn, %{"project" => project_params}) do
+    changeset = Project.changeset(%Project{}, Map.drop(project_params, ["readme"]))
+    if changeset.valid? do
+      project_id = Repo.insert(changeset) |> Map.get(:id)
+      badgelist = Dashex.Badge.process_readme(project_params["readme"])
+      project = Repo.get(Project, project_id)
+      Enum.map(badgelist, fn(b) -> build(project, :badges, b ) end ) |>
+      Enum.zip(badgelist) |>
+      Enum.map(fn(b) -> Dashex.Badge.changeset(elem(b,0), elem(b,1)) end ) |>
+      Enum.each(fn(change) -> if change.valid?, do: Repo.insert(change) end)
+    else
+      render(conn, "new_from_readme.html")
+    end
+    index(conn, project_params)
   end
 
   def create(conn, %{"project" => project_params}) do
